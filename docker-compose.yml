@@ -1,0 +1,41 @@
+version: '3'
+services:
+  redis:
+    image: redis
+    ports:
+      - '6380:6379'
+    volumes:
+      - redis:/data
+  db:
+    image: postgres:11
+    environment:
+      POSTGRES_USER: '${ORM_USERNAME}'
+      POSTGRES_PASSWORD: '${ORM_PASSWORD}'
+      POSTGRES_DB: '${ORM_DATABASE}'
+    ports:
+      - '5434:5432'
+    volumes:
+      - pg-data:/var/lib/postgresql/data
+  api:
+    build: .
+    command: npm run start:dev
+    volumes:
+      - .:/usr/src/app
+    ports:
+      - '3000:3000'
+    depends_on:
+      - db
+      - redis
+
+  test-db:
+    image: postgres:11
+    environment:
+      POSTGRES_USER: '${ORM_USERNAME}'
+      POSTGRES_PASSWORD: '${ORM_PASSWORD}'
+      POSTGRES_DB: '${ORM_TEST_DATABASE}'
+    ports:
+      - '5435:5432'
+
+volumes:
+  pg-data:
+  redis:
