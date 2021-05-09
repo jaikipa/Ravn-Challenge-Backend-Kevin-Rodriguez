@@ -28,6 +28,10 @@ import { AppController } from './app.controller';
         ORM_MIGRATIONS_RUN: Joi.boolean().default(true),
         ORM_SEEDS: Joi.string().default('src/seeds/**/*{.ts,.js}'),
         ORM_FACTORIES: Joi.string().default('src/seeds/factories/**/*{.ts,.js}'),
+        // Redis Env Vars
+        REDIS_HOST: Joi.string().default('localhost'),
+        REDIS_PORT: Joi.number().positive().integer().default(6379),
+        REDIS_TTL: Joi.number().positive().integer().default(1800),
       }),
     }),
     StoreModule,

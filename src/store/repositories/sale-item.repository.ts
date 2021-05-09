@@ -1,9 +1,12 @@
+import { Logger } from '@nestjs/common';
 import { EntityRepository, Repository } from 'typeorm';
 import { SaleItem } from '../entities/sale-item.entity';
 
 @EntityRepository(SaleItem)
 export class SaleItemRepository extends Repository<SaleItem> {
   getTopAuthors(authorName: string): Promise<SaleItem[]> {
+    Logger.debug(`Finding no cached Authors in DB: ${authorName}`, SaleItemRepository.name);
+
     const query = this.createQueryBuilder('saleItem')
       .select('SUM(saleItem.item_price * saleItem.quantity)', 'total_sales')
       .addSelect('author')
