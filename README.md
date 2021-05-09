@@ -23,10 +23,27 @@ Before install our project, env variables must be set.
 
 <center>
 
-| Environment Variable Key | Environment Variable Value |
-| ------------------------ | -------------------------- |
-| PORT                     | 3000                       |
-| NODE_ENV                 | [dev, staging, production] |
+| Environment Variable Key  | Environment Variable Value         |
+| ------------------------- | ---------------------------------- |
+| PORT                      | 3000                               |
+| API_PREFIX                | api/v1                             |
+| ORM_CONNECTION            | postgres                           |
+| ORM_HOST                  | localhost                          |
+| ORM_USERNAME              | [Your DB Username]                 |
+| ORM_PASSWORD              | [Your DB Password]                 |
+| ORM_PORT                  | 5432                               |
+| ORM_DATABASE              | postgres                           |
+| ORM_TEST_DATABASE         | test                               |
+| ORM_SCHEMA                | public                             |
+| ORM_MIGRATIONS_TABLE_NAME | migrations                         |
+| ORM_MIGRATIONS            | dist/migrations/\*.js              |
+| ORM_MIGRATIONS_DIR        | migrations                         |
+| ORM_MIGRATIONS_RUN        | true                               |
+| ORM_SEEDS                 | src/seeds/\*_/_{.ts,.js}           |
+| ORM_FACTORIES             | src/seeds/factories/\*_/_{.ts,.js} |
+| REDIS_HOST                | redis                              |
+| REDIS_PORT                | 6379                               |
+| REDIS_TTL                 | 1800                               |
 
 </center>
 
