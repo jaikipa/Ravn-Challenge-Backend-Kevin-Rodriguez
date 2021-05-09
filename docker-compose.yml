@@ -1,0 +1,28 @@
+version: '3'
+services:
+  db:
+    image: postgres:11
+    environment:
+      POSTGRES_USER: '${ORM_USERNAME}'
+      POSTGRES_PASSWORD: '${ORM_PASSWORD}'
+      POSTGRES_DB: '${ORM_DATABASE}'
+    ports:
+      - '5434:5432'
+  api:
+    build: .
+    command: npm run start:dev
+    volumes:
+      - .:/usr/src/app
+    ports:
+      - '3000:3000'
+    depends_on:
+      - db
+
+  test-db:
+    image: postgres:11
+    environment:
+      POSTGRES_USER: '${ORM_USERNAME}'
+      POSTGRES_PASSWORD: '${ORM_PASSWORD}'
+      POSTGRES_DB: '${ORM_TEST_DATABASE}'
+    ports:
+      - '5435:5432'
