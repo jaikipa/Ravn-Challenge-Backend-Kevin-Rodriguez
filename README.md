@@ -173,7 +173,7 @@ LEFT JOIN authors a ON b.author_id = a.id
 WHERE a.name ILIKE 'lorelai gilmore';
 ```
 
-Consider that the query uses a case insensitive match, instead of an exact match that can cause a lot of problems in a production environment. A more robust solution can add fuzzy search logic using the pg_tgrm extension that let's compare words by similarity. For example, if you search "Mike Smith" you can receive records matching names like "Mike Smith" or "Michael Smith".
+Consider that the query uses a case insensitive match, instead of an exact match that can cause a lot of problems in a production environment. A more robust solution can add fuzzy search logic using the pg_tgrm extension that let you compare words by similarity. For example, if you search "Mike Smith" you can receive records matching names like "Mike Smith" or "Michael Smith".
 
 3. What are the top 10 performing authors, ranked by sales revenue?
 
@@ -222,7 +222,7 @@ Once you have the Dockerfile created, you can build a container image of the API
 docker build -t ravn-challenge .
 ```
 
-- `t ravn-challenge` defines the tag of the container.
+- `-t ravn-challenge` defines the tag of the container.
 - `.` is the location of the Dockerfile.
 
 In order to upload the container image to DockerHub, you first have to create a Docker Id, in case you don't have one. Once you have your Docker Id, you can log in to your terminal using the following command:
