@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ravn-challenge
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ravn-challenge
+  template:
+    metadata:
+      labels:
+        app: ravn-challenge
+    spec:
+      containers:
+        - name: app
+          image: kevinare295/ravn-challenge:1.0.0
+          ports:
+            - containerPort: 3000
+          envFrom:
+            - secretRef:
+                name: postgres-secrets
+          env:
+            - name: ORM_HOST
+              value: 'postgres.default'
+            - name: ORM_USERNAME
+              value: '$(POSTGRES_USER)'
+            - name: ORM_PASSWORD
+              value: '$(POSTGRES_PASSWORD)'
+            - name: ORM_DATABASE
+              value: '$(POSTGRES_DB)'
+            - name: ORM_SCHEMA
+              value: public
+            - name: REDIS_HOST
+              value: 'redis-master.default'
+            - name: REDIS_TTL
+              value: '1800'
+          imagePullPolicy: Always
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ravn-challenge
+spec:
+  selector:
+    app: ravn-challenge
+  ports:
+    - port: 3000
+      targetPort: 3000
+  type: LoadBalancer
