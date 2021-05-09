@@ -23,7 +23,7 @@ describe('Authors (e2e)', () => {
     const moduleFixture: TestingModule = await Test.createTestingModule({
       imports: [
         StoreModule,
-        ConfigModule.forRoot(),
+        ConfigModule.forRoot({ isGlobal: true }),
         TypeOrmModule.forRootAsync({
           useFactory: getTestConnection,
         }),

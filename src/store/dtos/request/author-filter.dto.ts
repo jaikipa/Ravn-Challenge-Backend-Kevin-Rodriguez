@@ -3,7 +3,7 @@ import { IsOptional, IsString } from 'class-validator';
 export class AuthorFilterDto {
   /**
    * Use this field for filter authors by it name
-   * @example 'Kevin Rodríguez'
+   * @example 'John Doe'
    */
   @IsOptional()
   @IsString()
